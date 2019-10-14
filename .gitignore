@@ -1,0 +1,52 @@
+# This project
+node_modules/
+
+# Directories
+.Python/
+.ipynb_checkpoints/
+__pycache__/
+build/
+dist/
+*eggs/
+*.egg*/
+lib/
+lib64/
+downloads/
+sdist/
+env/
+var/
+htmlcov/
+cache/
+.cache/
+.tox/
+.coverage/
+parts/
+linux-*/
+osx-*/
+win-*/
+doc/build/
+target/
+.settings/
+
+# Compiled
+*.py[cod]
+*.nb[ci]
+*.so
+docs/source/*.txt
+
+# IDE and misc
+*.manifest
+*.spec
+pip-log.txt
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+*.mo
+*.pot
+*.log*
+*.project
+*.pydevproject
+*.swp
+*~
+*.DS_Store*

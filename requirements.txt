@@ -1,0 +1,4 @@
+aiosqlite
+asyncpg
+tortoise-orm
+pyyaml
