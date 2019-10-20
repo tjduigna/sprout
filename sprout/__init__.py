@@ -76,3 +76,5 @@ class cfg(Log):
 
 cfg = cfg()
 
+
+from sprout.init_db import init_db

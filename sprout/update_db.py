@@ -7,10 +7,10 @@ it to the current ORM table definitions."""
 
 import sys
 import asyncio
-import asyncpg
 import argparse
 import importlib
 
+import asyncpg
 import pandas as pd
 from tortoise import fields
 
@@ -121,23 +121,15 @@ def model_state(appname, schema, table):
     importlib.import_module(modkey)
     mod = sys.modules[modkey]
     obj = vars(mod)[table.title()]
-    inst = obj()
     names = [key for key in vars(obj).keys()
              if not key.startswith('_')]
     fields = [getattr(obj, fld) for fld in names]
     flds, typs = [], []
-    print("Inspecting the state of the model")
     for name, field in zip(names, fields):
-        print(name, field, type(field))
         if not isinstance(field, property):
             flds.append(name)
             typs.append(field)
-    print(typs)
-    print(_pg_type_map)
-    typs = [_pg_type_map[fld.__class__]
-            for fld in typs]
-    print("flds", flds)
-    print("typs", typs)
+    typs = [_pg_type_map[fld.__class__] for fld in typs]
     return pd.DataFrame.from_dict({
         'table_catalog': appname,
         'table_schema': schema,
