@@ -4,8 +4,8 @@
 
 import os
 import yaml
+import logging
 import logging.config
-
 
 _root = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(_root, 'conf', 'log.yml'), 'r') as f:
@@ -13,16 +13,16 @@ with open(os.path.join(_root, 'conf', 'log.yml'), 'r') as f:
 _log = logging.getLogger(__name__)
 _log.setLevel(logging.DEBUG)
 
-
 class Log:
+
     @property
     def log(self):
         return logging.getLogger(
             '.'.join([
                 self.__module__,
                 self.__class__.__name__
-            ]))
-
+            ])
+        )
 
 class cfg(Log):
 

@@ -8,7 +8,6 @@ it to the current ORM table definitions."""
 import sys
 import asyncio
 import asyncpg
-import inspect
 import argparse
 import importlib
 
