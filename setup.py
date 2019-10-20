@@ -5,6 +5,8 @@
 
 from setuptools import setup
 
+print("you must have gcc installed for dependencies to install")
+
 with open('requirements.txt', 'r') as f:
     deps = [ln.strip() for ln in f.readlines()
             if not ln.strip().startswith('#')]
