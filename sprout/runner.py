@@ -49,6 +49,7 @@ class Runner(sprout.Log):
         self.schemas = schemas
 
     def db_str(self, dbname=None, schema=None):
+        """Construct a 'jdbc' string"""
         c = self._cfg
         dbname = dbname or c['database']
         auth = f"{c['username']}:{c['password']}"
@@ -108,22 +109,34 @@ class Runner(sprout.Log):
         return pool
 
     def create_database(self, app=None):
+        """Initialize db"""
         self.app = app or self.app
         self._loop.run_until_complete(self._create_database())
 
     def create_schemas(self, app=None, schemas=None):
+        """Initialize db schemas"""
         self.app = app or self.app
         self.schemas = schemas or self.schemas
         self._loop.run_until_complete(self._create_schemas())
 
     def init_schemas(self, app=None, schemas=None):
+        """Initialize db tables"""
         self.app = app or self.app
         self.schemas = schemas or self.schemas
         self._loop.run_until_complete(self._init_schemas())
 
     def init_db_pool(self, app=None):
+        """Initialize db connection pool"""
         self.app = app or self.app
         pool = self._loop.run_until_complete(self._init_db_pool())
         return pool
 
+    def easy_up(self, app):
+        """Initialize everything and return a db
+        connection pool."""
+        self.create_database(app=app)
+        schemas = []
+        self.create_schemas(app=app, schemas=schemas)
+        self.init_schemas(app=app, schemas=schemas)
+        return self.init_db_pool(app=app)
 
